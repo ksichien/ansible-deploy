@@ -1,0 +1,7 @@
+---
+# file: db.yml
+- hosts: db
+  roles:
+    - common
+    - db
+    - firewall

@@ -1,0 +1,4 @@
+# Ignore all Vagrant configuration files
+.vagrant
+# Ignore the Vagrant retry file
+vagrant.retry

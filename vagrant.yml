@@ -1,0 +1,7 @@
+---
+# file: vagrant.yml
+- hosts: default
+  roles:
+  - common
+  - firewall
+  become: yes

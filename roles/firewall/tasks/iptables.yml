@@ -1,0 +1,23 @@
+---
+# file: roles/common/tasks/iptables.yml
+- name: install iptables-persistent
+  apt:
+    name: iptables-persistent
+    update_cache: yes
+    state: latest
+- name: copy the iptables ruleset file
+  copy:
+    src: rules.v4
+    dest: /etc/iptables/rules.v4
+    owner: root
+    group: root
+    mode: 0644
+- name: import the iptables ruleset
+  shell: iptables-restore < /etc/iptables/rules.v4
+- name: save the iptables ruleset
+  command: netfilter-persistent save
+- name: make sure netfilter-persistent is running and enabled on startup
+  service:
+    name: netfilter-persistent
+    state: started
+    enabled: yes

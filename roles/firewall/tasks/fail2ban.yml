@@ -1,0 +1,12 @@
+---
+# file: roles/common/tasks/fail2ban.yml
+- name: install fail2ban
+  apt:
+    name: fail2ban
+    update_cache: yes
+    state: latest
+- name: make sure fail2ban is running and enabled on startup
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes

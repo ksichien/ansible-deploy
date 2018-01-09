@@ -1,0 +1,7 @@
+---
+# file: web.yml
+- hosts: web
+  roles:
+    - common
+    - web
+    - firewall

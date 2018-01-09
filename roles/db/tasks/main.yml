@@ -1,0 +1,12 @@
+---
+# file: roles/db/tasks/main.yml
+- name: install postgresql
+  apt:
+    name: postgresql postgresql-contrib
+    update_cache: yes
+    state: latest
+- name: make sure postgres is running and enabled on startup
+  service:
+    name: postgres
+    state: started
+    enabled: yes

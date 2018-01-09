@@ -1,0 +1,5 @@
+---
+users:
+  - username: kennys
+    sudoers: 90-kennys
+    key: kennys.pub

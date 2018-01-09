@@ -1,0 +1,4 @@
+---
+# file: roles/firewall/tasks/main.yml
+- import_tasks: fail2ban.yml
+- import_tasks: iptables.yml
