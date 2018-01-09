@@ -23,14 +23,14 @@
 - name: disable password authentication through ssh
   lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: "^PasswordAuthentication"
-    line: "PasswordAuthentication no"
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication no'
     state: present
-  notify: restart ssh
+  notify: reload ssh
 - name: disable root login through ssh
   lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: "^PermitRootLogin"
-    line: "PermitRootLogin no"
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
     state: present
-  notify: restart ssh
+  notify: reload ssh

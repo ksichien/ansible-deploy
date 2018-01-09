@@ -1,0 +1,6 @@
+---
+# file: roles/firewall/handlers/main.yml
+- name: reload fail2ban
+  service:
+    name: fail2ban
+    state: reloaded

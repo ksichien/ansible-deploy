@@ -5,6 +5,31 @@
     name: fail2ban
     update_cache: yes
     state: latest
+- name: copy the jail.local file
+  copy:
+    remote_src: yes
+    src: /etc/fail2ban/jail.conf
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0440
+- name: enable ssh jail
+  replace:
+    path: /etc/fail2ban/jail.local
+    regexp: '^\[sshd\]'
+    replace: "[sshd]\nenabled=true"
+  notify: reload fail2ban
+- name: check if nginx is installed
+  stat: 
+    path: /usr/sbin/nginx
+  register: nginx_result
+- name: enable nginx jail
+  replace:
+    path: /etc/fail2ban/jail.local
+    regexp: '^\[nginx-http-auth\]'
+    replace: "[nginx-http-auth]\nenabled=true"
+  notify: reload fail2ban
+  when: nginx_result.stat.exists
 - name: make sure fail2ban is running and enabled on startup
   service:
     name: fail2ban

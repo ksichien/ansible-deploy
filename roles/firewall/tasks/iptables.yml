@@ -14,11 +14,6 @@
     mode: 0644
 - name: import the iptables ruleset
   shell: iptables-restore < /etc/iptables/rules.v4
-- import_tasks: fail2ban.yml
-- name: reload fail2ban configuration
-  service:
-    name: fail2ban
-    state: reloaded
 - name: save the iptables ruleset
   command: netfilter-persistent save
 - name: make sure netfilter-persistent is running and enabled on startup
