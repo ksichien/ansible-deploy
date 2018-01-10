@@ -1,2 +1,2 @@
 # ansible-notes
-This is a small collection of Ansible playbooks I've written to install and configure Debian Linux with PostgreSQL, Nginx and Ruby on Rails.
+This is a small collection of Ansible playbooks I've written to automate the installation and configuration of a Debian Linux webserver.
