@@ -2,7 +2,7 @@
 # file: roles/db/tasks/main.yml
 - name: install postgresql
   apt:
-    name: postgresql postgresql-contrib
+    name: postgresql postgresql-contrib libpq-dev
     update_cache: yes
     state: latest
 - name: make sure postgres is running and enabled on startup

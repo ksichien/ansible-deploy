@@ -1,5 +1,7 @@
 ---
+# file: roles/common/defaults/main.yml
 users:
-  - username: ksichien
-    sudoers: 90-ksichien
+  - name: avandelay
+    key: avandelay.pub
+  - name: ksichien
     key: ksichien.pub

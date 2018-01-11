@@ -1,0 +1,29 @@
+---
+# file: roles/web/tasks/git.yml
+- name: install git
+  apt:
+    name: git
+    update_cache: yes
+    state: latest
+- name: clone the git repository
+  git:
+    repo: "{{ git.repository }}"
+    dest: "/var/www/{{ application.name }}/"
+- name: copy database.yml and secrets.yml
+  copy:
+    src: "{{ item }}"
+    dest: "{{ application.base_dir }}/{{ application.name }}/config/{{ item }}"
+    owner: "{{ application.user }}"
+    group: "{{ application.user }}"
+    mode: 0600
+    force: yes
+  with_items: ['database.yml', 'secrets.yml']
+- name: copy devise.rb
+  copy:
+    src: "{{ item }}"
+    dest: "{{ application.base_dir }}/{{ application.name }}/config/initializers/{{ item }}"
+    owner: "{{ application.user }}"
+    group: "{{ application.user }}"
+    mode: 0600
+    force: yes
+  with_items: 'devise.rb'

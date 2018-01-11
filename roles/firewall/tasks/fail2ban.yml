@@ -22,14 +22,14 @@
 - name: check if nginx is installed
   stat: 
     path: /usr/sbin/nginx
-  register: nginx_result
+  register: nginx_installed
 - name: enable nginx jail
   replace:
     path: /etc/fail2ban/jail.local
     regexp: '^\[nginx-http-auth\]'
     replace: "[nginx-http-auth]\nenabled=true"
   notify: reload fail2ban
-  when: nginx_result.stat.exists
+  when: nginx_installed.stat.exists
 - name: make sure fail2ban is running and enabled on startup
   service:
     name: fail2ban

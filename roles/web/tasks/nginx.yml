@@ -1,0 +1,12 @@
+---
+# file: roles/web/tasks/nginx.yml
+- name: install nginx
+  apt:
+    name: nginx
+    update_cache: yes
+    state: latest
+- name: make sure nginx is running and enabled on startup
+  service:
+    name: nginx
+    state: started
+    enabled: yes
