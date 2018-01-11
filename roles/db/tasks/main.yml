@@ -2,11 +2,12 @@
 # file: roles/db/tasks/main.yml
 - name: install postgresql
   apt:
-    name: postgresql postgresql-contrib libpq-dev
+    name: "{{ item }}"
     update_cache: yes
     state: latest
+  with_items: ['postgresql', 'postgresql-contrib', 'libpq-dev', 'python-psycopg2']
 - name: make sure postgres is running and enabled on startup
   service:
-    name: postgres
+    name: postgresql
     state: started
     enabled: yes

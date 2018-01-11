@@ -9,6 +9,7 @@
   git:
     repo: "{{ git.repository }}"
     dest: "/var/www/{{ application.name }}/"
+    force: yes
 - name: copy database.yml and secrets.yml
   copy:
     src: "{{ item }}"

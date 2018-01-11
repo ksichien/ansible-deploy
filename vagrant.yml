@@ -3,6 +3,7 @@
 - hosts: default
   roles:
   - common
+  - db
   - web
   - firewall
   become: yes
