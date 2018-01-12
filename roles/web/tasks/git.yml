@@ -5,9 +5,9 @@
     name: git
     update_cache: yes
     state: latest
-- name: clone the git repository
+- name: clone the application's git repository
   git:
-    repo: "{{ git.repository }}"
+    repo: "{{ git.repository.application }}"
     dest: "/var/www/{{ application.name }}/"
     force: yes
 - name: copy database.yml and secrets.yml

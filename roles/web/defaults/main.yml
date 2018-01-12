@@ -3,11 +3,16 @@
 application:
   base_dir: /var/www
   name: rails-ldap-app
+  ruby_version: 2.5.0
   secret_key_base: e1a7d5f76a7f09eaff2f2b85339b07b3d1e2574fc1a358000a7896894b11747445d2cfc592f436825e0a76404f1c94a15f94e95bb37eb07de694c67737c04761
-  user: avandelay
+  user: ksichien
   database:
     name: rla-postgres
     password: rla-password
     username: rla-user
 git:
-  repository: https://github.com/ksichien/rails-ldap-app.git
+  repository:
+    application: https://github.com/ksichien/rails-ldap-app.git
+    rbenv: https://github.com/rbenv/rbenv.git
+    rbenv_vars: https://github.com/rbenv/rbenv-vars.git
+    ruby_build: https://github.com/rbenv/ruby-build.git

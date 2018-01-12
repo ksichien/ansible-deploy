@@ -1,2 +1,59 @@
 ---
 # file: roles/web/tasks/rbenv.yml
+- name: install rbenv
+  git:
+    repo: "{{ git.repository.rbenv }}"
+    dest: "/home/{{ application.user }}/.rbenv/"
+  become: yes
+- name: install ruby-build plugin
+  git:
+    repo: "{{ git.repository.ruby_build }}"
+    dest: "/home/{{ application.user }}/.rbenv/plugins/ruby-build/"
+  become: yes
+- name: add rbenv to path in bash_profile
+  lineinfile:
+    regexp: '^export'
+    line: export PATH="$HOME/.rbenv/bin:$PATH"
+    path: "/home/{{ application.user }}/.bash_profile"
+    create: yes
+    state: present
+- name: add rbenv init in bash_profile
+  lineinfile:
+    regexp: '^eval'
+    line: eval "$(rbenv init -)"
+    path: "/home/{{ application.user }}/.bash_profile"
+    create: yes
+    state: present
+- name: install ruby prerequisites
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: ['libssl-dev', 'libreadline-dev', 'zlib1g-dev']
+  become: yes
+- name: check whether ruby is installed
+  stat:
+    path: "/home/{{ application.user }}/.rbenv/versions/{{ application.ruby_version }}"
+  register: ruby_installed
+- name: install ruby
+  shell: "/home/{{ application.user }}/.rbenv/bin/rbenv install {{ application.ruby_version }}"
+  when: not ruby_installed.stat.exists
+- name: set global ruby version
+  shell: "/home/{{ application.user }}/.rbenv/bin/rbenv global {{ application.ruby_version }}"
+- name: install rbenv-vars plugin
+  git:
+    repo: "{{ git.repository.rbenv_vars }}"
+    dest: "/home/{{ application.user }}/.rbenv/plugins/rbenv-vars/"
+  become: yes
+- name: create .rbenv-vars file in the application's folder
+  copy:
+    content: "SECRET_KEY_BASE={{ application.secret_key_base }}\n
+             RBENV_VERSION={{ application.ruby_version }}\n
+             DB_NAME={{ application.database.name }}\n
+             DB_USER={{ application.database.username }}\n
+             DB_PASS={{ application.database.password }}"
+    dest: "{{ application.base_dir }}/{{ application.name }}/.rbenv-vars"
+    owner: "{{ application.user }}"
+    group: "{{ application.user }}"
+    mode: 0700
+  become: yes
+  become_user: root

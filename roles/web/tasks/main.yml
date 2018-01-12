@@ -2,5 +2,6 @@
 # file: roles/web/tasks/main.yml
 - import_tasks: git.yml
 - import_tasks: rbenv.yml
-- import_tasks: postgres.yml
+  become_user: "{{ application.user }}"
+- import_tasks: postgresql.yml
 - import_tasks: nginx.yml
