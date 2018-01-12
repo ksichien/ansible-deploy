@@ -1,6 +1,6 @@
 ---
 # file: roles/web/tasks/postgresql.yml
-- name: create the application database postgres user
+- name: create the application database user
   postgresql_user:
     name: "{{ application.database.username }}"
     password: "{{ application.database.password }}"
