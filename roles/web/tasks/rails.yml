@@ -1,0 +1,6 @@
+---
+# file: roles/web/tasks/rails.yml
+- name: install rails
+  shell: "/home/{{ application.user }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install rails"
+- name: rehash rbenv
+  shell: "/home/{{ application.user }}/.rbenv/bin/rbenv rehash"

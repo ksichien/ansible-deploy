@@ -30,6 +30,7 @@
     state: latest
   with_items: ['libssl-dev', 'libreadline-dev', 'zlib1g-dev']
   become: yes
+  become_user: root
 - name: check whether ruby is installed
   stat:
     path: "/home/{{ application.user }}/.rbenv/versions/{{ application.ruby_version }}"
@@ -57,3 +58,5 @@
     mode: 0700
   become: yes
   become_user: root
+- name: install bundler
+  shell: "/home/{{ application.user }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install bundler"

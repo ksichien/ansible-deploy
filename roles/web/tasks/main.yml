@@ -3,5 +3,7 @@
 - import_tasks: git.yml
 - import_tasks: rbenv.yml
   become_user: "{{ application.user }}"
+- import_tasks: rails.yml
+  become_user: "{{ application.user }}"
 - import_tasks: postgresql.yml
 - import_tasks: nginx.yml
