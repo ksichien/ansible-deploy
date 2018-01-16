@@ -15,8 +15,8 @@
 - name: enable ssh jail
   replace:
     path: /etc/fail2ban/jail.local
-    regexp: '^\[sshd\]'
-    replace: "[sshd]\nenabled=true"
+    regexp: '^\[sshd\]\n\nenabled = false'
+    replace: "[sshd]\n\nenabled = true"
   notify: reload fail2ban
 - name: check if nginx is installed
   stat: 
@@ -25,8 +25,8 @@
 - name: enable nginx jail
   replace:
     path: /etc/fail2ban/jail.local
-    regexp: '^\[nginx-http-auth\]'
-    replace: "[nginx-http-auth]\nenabled=true"
+    regexp: '^\[nginx-http-auth\]\n\nenabled = false'
+    replace: "[nginx-http-auth]\n\nenabled = true"
   notify: reload fail2ban
   when: nginx_installed.stat.exists
 - name: make sure fail2ban is running and enabled on startup
