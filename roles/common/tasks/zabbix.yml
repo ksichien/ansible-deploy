@@ -22,7 +22,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: reload zabbix agent
+  notify: restart zabbix agent
 - name: make sure zabbix agent is running and enabled
   service:
     name: zabbix-agent

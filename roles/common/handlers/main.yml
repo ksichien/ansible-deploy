@@ -4,7 +4,7 @@
   service:
     name: ssh
     state: reloaded
-- name: reload zabbix agent
+- name: restart zabbix agent
   service:
-    name: zabbix_agent
-    state: reloaded
+    name: zabbix-agent
+    state: restarted
