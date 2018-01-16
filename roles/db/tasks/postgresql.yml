@@ -3,7 +3,6 @@
 - name: install postgresql
   apt:
     name: "{{ item }}"
-    update_cache: yes
     state: latest
   with_items: ['postgresql', 'postgresql-contrib', 'libpq-dev', 'python-psycopg2']
 - name: make sure postgresql is running and enabled on startup

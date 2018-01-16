@@ -3,14 +3,13 @@
 - name: install git
   apt:
     name: git
-    update_cache: yes
     state: latest
 - name: clone the application's git repository
   git:
     repo: "{{ git.repository.application }}"
     dest: "/var/www/{{ application.name }}/"
     force: yes
-- name: copy database.yml and secrets.yml
+- name: create database.yml and secrets.yml
   copy:
     src: "{{ item }}"
     dest: "{{ application.base_dir }}/{{ application.name }}/config/{{ item }}"
@@ -19,7 +18,7 @@
     mode: 0600
     force: yes
   with_items: ['database.yml', 'secrets.yml']
-- name: copy devise.rb
+- name: create devise.rb
   copy:
     src: "{{ item }}"
     dest: "{{ application.base_dir }}/{{ application.name }}/config/initializers/{{ item }}"

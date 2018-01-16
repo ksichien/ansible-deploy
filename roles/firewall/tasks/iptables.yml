@@ -3,9 +3,8 @@
 - name: install iptables-persistent
   apt:
     name: iptables-persistent
-    update_cache: yes
     state: latest
-- name: copy the iptables ruleset file
+- name: create rules.v4
   copy:
     src: rules.v4
     dest: /etc/iptables/rules.v4

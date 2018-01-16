@@ -5,3 +5,5 @@ users:
     key: avandelay.pub
   - name: ksichien
     key: ksichien.pub
+zabbix:
+  address: 10.10.10.100

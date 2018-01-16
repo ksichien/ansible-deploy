@@ -45,7 +45,7 @@
     repo: "{{ git.repository.rbenv_vars }}"
     dest: "/home/{{ application.user }}/.rbenv/plugins/rbenv-vars/"
   become: yes
-- name: create .rbenv-vars file in the application's folder
+- name: create .rbenv-vars in the application's folder
   copy:
     content: "SECRET_KEY_BASE={{ application.secret_key_base }}\n
              RBENV_VERSION={{ application.ruby_version }}\n
