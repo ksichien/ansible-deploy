@@ -1,0 +1,73 @@
+---
+# file: roles/app/tasks/ruby.yml
+- name: install rbenv
+  git:
+    repo: "{{ git.repository.rbenv }}"
+    dest: "/home/{{ application.username }}/.rbenv/"
+- name: install ruby-build plugin
+  git:
+    repo: "{{ git.repository.ruby_build }}"
+    dest: "/home/{{ application.username }}/.rbenv/plugins/ruby-build/"
+- name: install rbenv-vars plugin
+  git:
+    repo: "{{ git.repository.rbenv_vars }}"
+    dest: "/home/{{ application.username }}/.rbenv/plugins/rbenv-vars/"
+- name: reassign rbenv folder ownership to application user
+  file:
+    path: "/home/{{ application.username }}/.rbenv/"
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
+    recurse: yes
+- name: add rbenv to path in bash_profile
+  lineinfile:
+    regexp: '^export'
+    line: export PATH="$HOME/.rbenv/bin:$PATH"
+    path: "/home/{{ application.username }}/.bash_profile"
+    create: yes
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
+    mode: 0644
+    state: present
+- name: add rbenv init to bash_profile
+  lineinfile:
+    regexp: '^eval'
+    line: eval "$(rbenv init -)"
+    path: "/home/{{ application.username }}/.bash_profile"
+    create: yes
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
+    mode: 0644
+    state: present
+- name: create .rbenv-vars in the application's folder
+  copy:
+    content: "SECRET_KEY_BASE={{ application.secret_key_base }}\n
+             RBENV_VERSION={{ application.ruby_version }}\n
+             DB_NAME={{ application.database.name }}\n
+             DB_USER={{ application.database.username }}\n
+             DB_PASS={{ application.database.password }}"
+    dest: "{{ application.base_dir }}/{{ application.name }}/.rbenv-vars"
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
+    mode: 0600
+- name: install ruby prerequisites
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: ['libssl-dev', 'libreadline-dev', 'zlib1g-dev']
+- name: check whether ruby is installed
+  stat:
+    path: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}"
+  register: ruby_installed
+- name: install ruby
+  shell: "/home/{{ application.username }}/.rbenv/bin/rbenv install {{ application.ruby_version }}"
+  when: not ruby_installed.stat.exists
+  become: yes
+  become_user: "{{ application.username }}"
+- name: set global ruby version
+  shell: "/home/{{ application.username }}/.rbenv/bin/rbenv global {{ application.ruby_version }}"
+  become: yes
+  become_user: "{{ application.username }}"
+- name: install bundler
+  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install bundler"
+  become: yes
+  become_user: "{{ application.username }}"

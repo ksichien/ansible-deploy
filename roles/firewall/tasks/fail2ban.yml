@@ -9,9 +9,6 @@
     remote_src: yes
     src: /etc/fail2ban/jail.conf
     dest: /etc/fail2ban/jail.local
-    owner: root
-    group: root
-    mode: 0440
 - name: enable ssh jail
   replace:
     path: /etc/fail2ban/jail.local

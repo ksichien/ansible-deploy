@@ -10,3 +10,11 @@
     name: postgresql
     state: started
     enabled: yes
+- name: create the application database user
+  postgresql_user:
+    name: "{{ database.username }}"
+    password: "{{ database.password }}"
+    role_attr_flags: CREATEDB,LOGIN
+    state: present
+  become: yes
+  become_user: postgres

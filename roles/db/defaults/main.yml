@@ -1,0 +1,5 @@
+---
+# file: roles/db/defaults/main.yml
+database:
+  username: rla-user
+  password: rla-password

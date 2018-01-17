@@ -15,16 +15,14 @@
   apt:
     name: zabbix-agent
     state: latest
-- name: create zabbix_agentd.conf
-  template:
-    src: zabbix_agentd.conf
-    dest: /etc/zabbix/zabbix_agentd.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart zabbix agent
-- name: make sure zabbix agent is running and enabled
-  service:
-    name: zabbix-agent
-    state: started
-    enabled: yes
+# - name: create zabbix_agentd.conf
+#   template:
+#     src: zabbix_agentd.conf
+#     dest: /etc/zabbix/zabbix_agentd.conf
+#     mode: 0644
+#   notify: restart zabbix agent
+# - name: make sure zabbix agent is running and enabled
+#   service:
+#     name: zabbix-agent
+#     state: started
+#     enabled: yes

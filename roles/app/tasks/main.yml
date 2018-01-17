@@ -1,0 +1,5 @@
+---
+# file: roles/app/tasks/main.yml
+- import_tasks: git.yml
+- import_tasks: ruby.yml
+- import_tasks: rails.yml

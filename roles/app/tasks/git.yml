@@ -1,5 +1,5 @@
 ---
-# file: roles/web/tasks/git.yml
+# file: roles/app/tasks/git.yml
 - name: install git
   apt:
     name: git
@@ -9,12 +9,18 @@
     repo: "{{ git.repository.application }}"
     dest: "/var/www/{{ application.name }}/"
     force: yes
+- name: reassign application folder ownership to application user
+  file:
+    path: "/var/www/{{ application.name }}/"
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
+    recurse: yes
 - name: create database.yml and secrets.yml
   copy:
     src: "{{ item }}"
     dest: "{{ application.base_dir }}/{{ application.name }}/config/{{ item }}"
-    owner: "{{ application.user }}"
-    group: "{{ application.user }}"
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
     mode: 0600
     force: yes
   with_items: ['database.yml', 'secrets.yml']
@@ -22,8 +28,8 @@
   copy:
     src: "{{ item }}"
     dest: "{{ application.base_dir }}/{{ application.name }}/config/initializers/{{ item }}"
-    owner: "{{ application.user }}"
-    group: "{{ application.user }}"
+    owner: "{{ application.username }}"
+    group: "{{ application.username }}"
     mode: 0600
     force: yes
   with_items: 'devise.rb'

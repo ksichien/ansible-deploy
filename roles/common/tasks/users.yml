@@ -10,8 +10,6 @@
   copy:
     content: "{{ item.name }} ALL=(ALL) NOPASSWD:ALL"
     dest: "/etc/sudoers.d/90-{{ item.name }}"
-    owner: root
-    group: root
     mode: 0440
   with_items: "{{ users }}"
 - name: add ssh keys
