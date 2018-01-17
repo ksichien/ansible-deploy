@@ -1,5 +1,11 @@
 ---
 # file: roles/db/defaults/main.yml
 database:
-  username: rla-user
-  password: rla-password
+  name: rla_production
+  username: rla_production
+  password: rla_password
+application:
+  base_dir: /var/www
+  name: rails-ldap-app
+  ruby_version: 2.4.3
+  username: rla_production

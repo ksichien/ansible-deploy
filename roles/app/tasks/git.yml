@@ -1,5 +1,11 @@
 ---
 # file: roles/app/tasks/git.yml
+- name: create application user
+  user:
+    name: "{{ application.username }}"
+    password: "{{ application.password }}"
+    shell: /bin/bash
+    state: present
 - name: install git
   apt:
     name: git
@@ -33,3 +39,15 @@
     mode: 0600
     force: yes
   with_items: 'devise.rb'
+- name: execute rake secret
+  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle exec rake secret"
+  args:
+    chdir: "/var/www/{{ application.name }}/"
+  register: rake_secret
+  become: yes
+  become_user: "{{ application.username }}"
+- name: set secret_key_base for devise.rb
+  replace:
+    path: "{{ application.base_dir }}/{{ application.name }}/config/initializers/devise.rb"
+    regexp: '^(\s+)config.secret_key = ENV\[\"SECRET_KEY_BASE\"\]'
+    replace: "\t\t\tconfig.secret_key = {{ rake_secret.stdout }}"

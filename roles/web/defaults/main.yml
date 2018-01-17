@@ -3,4 +3,4 @@
 application:
   base_dir: /var/www
   name: rails-ldap-app
-  username: ksichien
+  username: rla_user

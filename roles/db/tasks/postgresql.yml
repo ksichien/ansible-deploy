@@ -10,11 +10,29 @@
     name: postgresql
     state: started
     enabled: yes
+- name: create the application database
+  postgresql_db:
+    name: "{{ database.name }}"
+  become: yes
+  become_user: postgres
 - name: create the application database user
   postgresql_user:
+    db: "{{ database.name }}"
     name: "{{ database.username }}"
     password: "{{ database.password }}"
     role_attr_flags: CREATEDB,LOGIN
     state: present
   become: yes
   become_user: postgres
+- name: install application dependencies
+  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle install --deployment --without development test"
+  args:
+    chdir: "/var/www/{{ application.name }}/"
+  become: yes
+  become_user: "{{ application.username }}"
+- name: compile rails assets and run database migrations
+  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle exec rake assets:precompile db:migrate RAILS_ENV=production"
+  args:
+    chdir: "/var/www/{{ application.name }}/"
+  become: yes
+  become_user: "{{ application.username }}"

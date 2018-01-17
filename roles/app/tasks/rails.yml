@@ -13,14 +13,19 @@
     name: "{{ item }}"
     state: latest
   with_items: ['apt-transport-https', 'ca-certificates', 'curl']
+- name: check whether nodejs is installed
+  stat:
+    path: /usr/bin/nodejs
+  register: nodejs_installed
 - name: download the nodejs setup script from nodesource
   get_url: 
     url: https://deb.nodesource.com/setup_8.x
     dest: "/home/{{ application.username }}/setup-nodejs"
     mode: 0755
-    force: yes
+  when: not nodejs_installed.stat.exists
 - name: execute the nodejs setup script
   shell: "/home/{{ application.username }}/setup-nodejs"
+  when: not nodejs_installed.stat.exists
 - name: install nodejs
   apt:
     name: "{{ item }}"
