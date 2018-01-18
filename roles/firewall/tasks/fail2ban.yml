@@ -1,5 +1,5 @@
 ---
-# file: roles/common/tasks/fail2ban.yml
+# file: roles/firewall/tasks/fail2ban.yml
 - name: install fail2ban
   apt:
     name: fail2ban
@@ -9,6 +9,9 @@
     remote_src: yes
     src: /etc/fail2ban/jail.conf
     dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0440
 - name: check if nginx is installed
   stat: 
     path: /usr/sbin/nginx

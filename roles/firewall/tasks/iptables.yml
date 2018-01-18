@@ -1,5 +1,5 @@
 ---
-# file: roles/common/tasks/iptables.yml
+# file: roles/firewall/tasks/iptables.yml
 - name: install iptables-persistent
   apt:
     name: iptables-persistent
@@ -8,6 +8,9 @@
   copy:
     src: rules.v4
     dest: /etc/iptables/rules.v4
+    owner: root
+    group: root
+    mode: 0644
 - name: import the iptables ruleset
   shell: iptables-restore < /etc/iptables/rules.v4
 - name: save the iptables ruleset
