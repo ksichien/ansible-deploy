@@ -1,8 +1,0 @@
----
-# file: web.yml
-- hosts: web
-  roles:
-    - common
-    - app
-    - web
-    - firewall

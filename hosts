@@ -1,32 +1,11 @@
-# file: hosts
-[ger-db]
-db-ger-1.vandelayindustries.com ansible_ssh_host=10.1.1.10
-db-ger-2.vandelayindustries.com ansible_ssh_host=10.1.1.11
-
 [ger-web]
-web-ger-1.vandelayindustries.com ansible_ssh_host=10.1.1.20
-web-ger-2.vandelayindustries.com ansible_ssh_host=10.1.1.21
-
-[swe-db]
-db-swe-1.vandelayindustries.com ansible_ssh_host=10.2.1.10
-db-swe-2.vandelayindustries.com ansible_ssh_host=10.2.1.11
+web-ger-1.vandelayindustries.com ansible_host=10.1.1.20
+web-ger-2.vandelayindustries.com ansible_host=10.1.1.21
 
 [swe-web]
-web-swe-1.vandelayindustries.com ansible_ssh_host=10.2.1.20
-web-swe-2.vandelayindustries.com ansible_ssh_host=10.2.1.21
-
-[db:children]
-ger-db
-swe-db
+web-swe-1.vandelayindustries.com ansible_host=10.2.1.20
+web-swe-2.vandelayindustries.com ansible_host=10.2.1.21
 
 [web:children]
 ger-web
-swe-web
-
-[germany:children]
-ger-db
-ger-web
-
-[sweden:children]
-swe-db
 swe-web

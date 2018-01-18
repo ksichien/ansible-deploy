@@ -21,6 +21,11 @@
     owner: "{{ application.username }}"
     group: "{{ application.username }}"
     recurse: yes
+- name: modify access permissions for application config and db folders
+  file:
+    path: "/var/www/{{ application.name }}/{{ item }}"
+    mode: 0700
+  with_items: ['config', 'db']
 - name: create database.yml and secrets.yml
   copy:
     src: "{{ item }}"
@@ -31,7 +36,7 @@
     force: yes
   with_items: ['database.yml', 'secrets.yml']
 - name: create devise.rb
-  copy:
+  template:
     src: "{{ item }}"
     dest: "{{ application.base_dir }}/{{ application.name }}/config/initializers/{{ item }}"
     owner: "{{ application.username }}"
@@ -39,15 +44,3 @@
     mode: 0600
     force: yes
   with_items: 'devise.rb'
-- name: execute rake secret
-  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle exec rake secret"
-  args:
-    chdir: "/var/www/{{ application.name }}/"
-  register: rake_secret
-  become: yes
-  become_user: "{{ application.username }}"
-- name: set secret_key_base for devise.rb
-  replace:
-    path: "{{ application.base_dir }}/{{ application.name }}/config/initializers/devise.rb"
-    regexp: '^(\s+)config.secret_key = ENV\[\"SECRET_KEY_BASE\"\]'
-    replace: "\t\t\tconfig.secret_key = {{ rake_secret.stdout }}"

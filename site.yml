@@ -1,4 +1,10 @@
 ---
 # file: site.yml
-- import_playbook: db.yml
-- import_playbook: web.yml
+- hosts: web
+  roles:
+  - common
+  - app
+  - db
+  - web
+  - firewall
+  become: yes

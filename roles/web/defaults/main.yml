@@ -1,6 +1,5 @@
 ---
 # file: roles/web/defaults/main.yml
-application:
-  base_dir: /var/www
-  name: rails-ldap-app
-  username: rla_user
+server:
+  name: rla.vandelayindustries.com
+  port: 80

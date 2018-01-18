@@ -8,10 +8,6 @@
   git:
     repo: "{{ git.repository.ruby_build }}"
     dest: "/home/{{ application.username }}/.rbenv/plugins/ruby-build/"
-- name: install rbenv-vars plugin
-  git:
-    repo: "{{ git.repository.rbenv_vars }}"
-    dest: "/home/{{ application.username }}/.rbenv/plugins/rbenv-vars/"
 - name: reassign rbenv folder ownership to application user
   file:
     path: "/home/{{ application.username }}/.rbenv/"
@@ -38,17 +34,16 @@
     group: "{{ application.username }}"
     mode: 0644
     state: present
-- name: create .rbenv-vars in the application's folder
-  copy:
-    content: "SECRET_KEY_BASE={{ application.secret_key_base }}\n
-             RBENV_VERSION={{ application.ruby_version }}\n
-             DB_NAME={{ application.database.name }}\n
-             DB_USER={{ application.database.username }}\n
-             DB_PASS={{ application.database.password }}"
-    dest: "{{ application.base_dir }}/{{ application.name }}/.rbenv-vars"
+- name: source bash_profile in bashrc
+  lineinfile:
+    regexp: '^source ~/.bash_profile'
+    line: source ~/.bash_profile
+    path: "/home/{{ application.username }}/.bashrc"
+    create: yes
     owner: "{{ application.username }}"
     group: "{{ application.username }}"
-    mode: 0600
+    mode: 0644
+    state: present
 - name: install ruby prerequisites
   apt:
     name: "{{ item }}"

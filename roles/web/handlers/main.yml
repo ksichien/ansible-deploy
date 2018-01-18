@@ -1,6 +1,6 @@
 ---
 # file: roles/web/handlers/main.yml
-- name: reload nginx
+- name: restart nginx
   service:
     name: nginx
-    state: reloaded
+    state: restarted

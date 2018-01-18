@@ -1,9 +1,35 @@
 ---
 # file: roles/web/tasks/nginx.yml
-- name: install nginx
+- name: install passenger prerequisites
   apt:
-    name: nginx
+    name: "{{ item }}"
     state: latest
+  with_items: ['apt-transport-https', 'ca-certificates', 'dirmngr', 'gnupg']
+- name: add passenger pgp key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 561F9B9CAC40B2F7
+    state: present
+- name: add passenger apt repository
+  apt_repository:
+    repo: "deb https://oss-binaries.phusionpassenger.com/apt/passenger {{ ansible_distribution_release }} main"
+    filename: passenger
+    update_cache: yes
+- name: install nginx and passenger
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: ['nginx', 'libnginx-mod-http-passenger']
+- name: remove default nginx website
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: restart nginx
+- name: create rails-ldap-app.conf
+  template: 
+    src: rails-ldap-app.conf
+    dest: /etc/nginx/sites-enabled/rails-ldap-app.conf
+  notify: restart nginx
 - name: make sure nginx is running and enabled on startup
   service:
     name: nginx
