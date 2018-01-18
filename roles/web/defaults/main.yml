@@ -2,4 +2,7 @@
 # file: roles/web/defaults/main.yml
 server:
   name: rla.vandelayindustries.com
-  port: 80
+  port: 443
+certificate:
+  common: www.vandelayindustries.com
+  passphrase: self_signed_certificate_passphrase

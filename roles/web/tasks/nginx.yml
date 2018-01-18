@@ -1,5 +1,37 @@
 ---
 # file: roles/web/tasks/nginx.yml
+- name: install openssl prerequisities
+  apt:
+    name: python-openssl
+    state: latest
+- name: create ssl directory
+  file:
+    path: /etc/nginx/ssl/
+    state: directory
+- openssl_privatekey:
+    path: "/etc/nginx/ssl/{{ server.name }}.pem"
+    passphrase: "{{ certificate.passphrase }}"
+    cipher: aes256
+- name: generate an openssl csr
+  openssl_csr:
+    path: "/etc/nginx/ssl/{{ server.name }}.csr"
+    privatekey_path: "/etc/nginx/ssl/{{ server.name }}.pem"
+    privatekey_passphrase: "{{ certificate.passphrase }}"
+    common_name: "{{ certificate.common }}"
+    state: present
+- name: generate an openssl self-signed certificate
+  openssl_certificate:
+    provider: selfsigned
+    csr_path: "/etc/nginx/ssl/{{ server.name }}.csr"
+    path: "/etc/nginx/ssl/{{ server.name }}.crt"
+    privatekey_path: "/etc/nginx/ssl/{{ server.name }}.pem"
+    privatekey_passphrase: "{{ certificate.passphrase }}"
+    state: present
+- name: save the certificate passphrase to a file for nginx
+  copy:
+    content: "{{ certificate.passphrase }}"
+    dest: "/etc/nginx/ssl/{{ server.name }}.pass"
+    mode: 0600
 - name: install passenger prerequisites
   apt:
     name: "{{ item }}"

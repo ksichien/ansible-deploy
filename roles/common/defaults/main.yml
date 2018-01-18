@@ -2,8 +2,6 @@
 # file: roles/common/defaults/main.yml
 # Variables set in this folder are only available for this role.
 users:
-  - name: avandelay
-    key: avandelay.pub
   - name: ksichien
     key: ksichien.pub
 zabbix:
