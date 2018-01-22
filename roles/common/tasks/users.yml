@@ -1,5 +1,13 @@
 ---
 # file: roles/common/tasks/users.yml
+- name: set hostname
+  hostname:
+    name: "{{ application.name }}"
+- name: add hostname to /etc/hosts
+  replace:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1(\t+)localhost'
+    replace: "127.0.0.1 localhost {{ application.name }}"
 - name: create users
   user:
     name: "{{ item.name }}"
