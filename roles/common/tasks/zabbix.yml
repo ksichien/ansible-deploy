@@ -21,8 +21,8 @@
 #     dest: /etc/zabbix/zabbix_agentd.conf
 #     mode: 0644
 #   notify: restart zabbix agent
-# - name: make sure zabbix agent is running and enabled
-#   service:
-#     name: zabbix-agent
-#     state: started
-#     enabled: yes
+- name: make sure zabbix agent is running and enabled
+  service:
+    name: zabbix-agent
+    state: started
+    enabled: yes

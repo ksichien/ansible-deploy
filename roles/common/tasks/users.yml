@@ -14,7 +14,7 @@
     group: root
     mode: 0440
   with_items: "{{ users }}"
-- name: add ssh keys
+- name: add ssh keys to authorized keys
   authorized_key:
     user: "{{ item.name }}"
     state: present

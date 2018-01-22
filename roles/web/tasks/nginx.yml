@@ -57,6 +57,12 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify: restart nginx
+- name: enable passenger
+  replace:
+    path: /etc/nginx/nginx.conf
+    regexp: '^(\s+)# include /etc/nginx/passenger.conf;'
+    replace: 'include /etc/nginx/passenger.conf;'
+  notify: restart nginx
 - name: create rails-ldap-app.conf
   template: 
     src: rails-ldap-app.conf
