@@ -1,11 +1,16 @@
-[ger-web]
-web-ger-1.vandelayindustries.com ansible_host=10.1.1.20
-web-ger-2.vandelayindustries.com ansible_host=10.1.1.21
+[de-web]
+web-de-1.vandelayindustries.com ansible_host=10.1.1.20
+web-de-2.vandelayindustries.com ansible_host=10.1.1.21
 
-[swe-web]
-web-swe-1.vandelayindustries.com ansible_host=10.2.1.20
-web-swe-2.vandelayindustries.com ansible_host=10.2.1.21
+[il-web]
+web-il-1.vandelayindustries.com ansible_host=10.2.1.20
+web-il-2.vandelayindustries.com ansible_host=10.2.1.21
 
 [web:children]
-ger-web
-swe-web
+de-web
+il-web
+
+[web:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vandelayindustries.com"'
+ansible_user=ksichien
