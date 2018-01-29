@@ -2,3 +2,5 @@
 .vagrant
 # Ignore retry files
 *.retry
+# Ignore vscode files
+.vscode

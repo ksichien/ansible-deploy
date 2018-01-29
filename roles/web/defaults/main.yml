@@ -1,8 +1,8 @@
 ---
 # file: roles/web/defaults/main.yml
 server:
-  name: rla.vandelayindustries.com
+  name:"{{ ansible_default_ipv4.address }}"
   port: 443
 certificate:
-  common: www.vandelayindustries.com
+  common: authority.vandelayindustries.com
   passphrase: self_signed_certificate_passphrase

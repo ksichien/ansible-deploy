@@ -2,7 +2,7 @@
 # file: roles/web/tasks/nginx.yml
 - name: install openssl prerequisities
   apt:
-    name: python-openssl
+    name: python3-openssl
     state: latest
 - name: create ssl directory
   file:

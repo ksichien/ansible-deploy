@@ -48,7 +48,7 @@
   apt:
     name: "{{ item }}"
     state: latest
-  with_items: ['libssl-dev', 'libreadline-dev', 'zlib1g-dev']
+  with_items: ['build-essential', 'libssl-dev', 'libreadline-dev', 'zlib1g-dev']
 - name: check whether ruby is installed
   stat:
     path: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}"
