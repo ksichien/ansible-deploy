@@ -1,5 +1,5 @@
-# ansible-notes
-This is a small collection of Ansible playbooks I've written to automate the installation and configuration of a Debian GNU/Linux server. 
+# ansible-deploy
+This is a small collection of Ansible playbooks I've written to automate the installation and configuration of a Debian GNU/Linux Ruby on Rails webserver. 
 
 There are several roles included:
 - common: create user accounts, configure ssh access and the zabbix agent.
