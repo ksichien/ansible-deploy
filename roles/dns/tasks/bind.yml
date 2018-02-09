@@ -46,6 +46,11 @@
     mode: 0640
     state: touch
   with_items: ['bind.log', 'security_info.log', 'update_debug.log']
+- name: modify /etc/resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: '^search .+'
+    line: "search {{ domain }}"
 - name: make sure bind is running and enabled on startup
   service:
     name: bind9
