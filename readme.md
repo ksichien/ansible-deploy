@@ -1,12 +1,10 @@
-# ansible-deploy
-This is a small collection of Ansible playbooks I've written to automate the installation and configuration of a Debian GNU/Linux Ruby on Rails webserver. 
+# ansible-playbooks
+This is a small collection of Ansible playbooks I've written to automate the installation, configuration and maintenance of several Debian GNU/Linux servers.
 
 There are several roles included:
-- common: create user accounts, configure ssh access and the zabbix agent.
-- app: clone the web application with git, configure ruby, configure rails
-- db: configure postgresql
-- web: configure nginx and passenger
+- common: create user accounts and configure ssh access
 - firewall: configure iptables and fail2ban
+- web: clone the web application with git, configure ruby, configure rails, configure postgresql, configure nginx and passenger
 
 I've included a Vagrantfile and vagrant.yml playbook for testing everything out.
 
