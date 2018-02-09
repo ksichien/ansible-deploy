@@ -51,6 +51,12 @@
     path: /etc/resolv.conf
     regexp: '^search .+'
     line: "search {{ domain }}"
+- name: modify /etc/bind/zones.rfc1918
+  lineinfile:
+    path: /etc/bind/zones.rfc1918
+    regexp: 'zone "{{ reverse }}.in-addr.arpa"\s+{ type master; file "/etc/bind/db.empty"; };'
+    line: 'zone "{{ reverse }}.in-addr.arpa" { type master; file "/var/lib/bind/db.{{ domain }}"; };'
+    state: present
 - name: make sure bind is running and enabled on startup
   service:
     name: bind9
