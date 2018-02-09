@@ -3,8 +3,13 @@
 - hosts: onsite
   roles:
   - common
-  - app
-  - db
-  - web
   - firewall
   become: yes
+  vars:
+    - ansible_python_interpreter: /usr/bin/python3
+- hosts: rla
+  roles:
+  - web
+  become: yes
+  vars:
+    - ansible_python_interpreter: /usr/bin/python3

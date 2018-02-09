@@ -1,5 +1,5 @@
 ---
-# file: roles/db/tasks/postgresql.yml
+# file: roles/web/tasks/postgresql.yml
 - name: install postgresql
   apt:
     name: "{{ item }}"

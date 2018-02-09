@@ -1,5 +1,5 @@
 ---
-# file: roles/app/tasks/rails.yml
+# file: roles/web/tasks/rails.yml
 - name: install rails
   shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install rails"
   become: yes

@@ -2,12 +2,12 @@
 # file: roles/common/tasks/users.yml
 - name: set hostname
   hostname:
-    name: "{{ application.name }}"
-- name: add hostname to /etc/hosts
+    name: "{{ inventory_hostname_short }}"
+- name: set hostname in /etc/hosts
   replace:
     path: /etc/hosts
-    regexp: '^127.0.0.1 localhost.localdomain localhost'
-    replace: "127.0.0.1 localhost {{ application.name }}"
+    regexp: "127.0.1.1\t.+"
+    replace: "127.0.1.1\t{{ inventory_hostname_short }}.{{ domain }} {{ inventory_hostname_short }}"
 - name: create users
   user:
     name: "{{ item.name }}"

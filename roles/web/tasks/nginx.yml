@@ -8,7 +8,8 @@
   file:
     path: /etc/nginx/ssl/
     state: directory
-- openssl_privatekey:
+- name: generate an openssl private key
+  openssl_privatekey:
     path: "/etc/nginx/ssl/{{ server.name }}.pem"
     passphrase: "{{ certificate.passphrase }}"
     cipher: aes256

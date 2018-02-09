@@ -1,8 +1,25 @@
 ---
 # file: roles/web/defaults/main.yml
-server:
-  name:"{{ ansible_default_ipv4.address }}"
-  port: 443
+application:
+  base_dir: /var/www
+  devise_secret_key: faf1029a04af0309335642b4f230ccff198eaabb5b7463308fc48cd6837d6b7bdb840f73b5dd38ef8d461bff33ed5968bf38259ec83d3e3d3e1847591ba0a0ec
+  name: rails-ldap-app
+  ruby_version: 2.4.3
+  secret_key_base: e1a7d5f76a7f09eaff2f2b85339b07b3d1e2574fc1a358000a7896894b11747445d2cfc592f436825e0a76404f1c94a15f94e95bb37eb07de694c67737c04761
+  username: rla_production
+  password: rla_application_password
 certificate:
-  common: authority.vandelayindustries.com
+  common: authority.darkness.org
   passphrase: self_signed_certificate_passphrase
+database:
+  name: rla_production
+  username: rla_production
+  password: rla_database_password  
+git:
+  repository:
+    application: https://github.com/ksichien/rails-ldap-app.git
+    rbenv: https://github.com/rbenv/rbenv.git
+    ruby_build: https://github.com/rbenv/ruby-build.git
+server:
+  name: "{{ ansible_default_ipv4.address }}"
+  port: 443

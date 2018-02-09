@@ -1,7 +1,0 @@
----
-# file: roles/app/defaults/main.yml
-git:
-  repository:
-    application: https://github.com/ksichien/rails-ldap-app.git
-    rbenv: https://github.com/rbenv/rbenv.git
-    ruby_build: https://github.com/rbenv/ruby-build.git

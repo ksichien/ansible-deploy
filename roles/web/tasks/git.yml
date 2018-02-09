@@ -1,5 +1,5 @@
 ---
-# file: roles/app/tasks/git.yml
+# file: roles/web/tasks/git.yml
 - name: create application user
   user:
     name: "{{ application.username }}"

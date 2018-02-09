@@ -1,5 +1,5 @@
 ---
-# file: roles/app/tasks/ruby.yml
+# file: roles/web/tasks/ruby.yml
 - name: install rbenv
   git:
     repo: "{{ git.repository.rbenv }}"
