@@ -4,3 +4,7 @@
   service:
     name: fail2ban
     state: reloaded
+- name: reload ufw
+  service:
+    name: ufw
+    state: reloaded

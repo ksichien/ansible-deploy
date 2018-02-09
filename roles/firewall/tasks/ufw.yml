@@ -1,0 +1,28 @@
+---
+# file: roles/firewall/tasks/ufw.yml
+- name: install ufw
+  apt:
+    name: ufw
+    state: latest
+- name: allow ssh
+  ufw:
+    rule: allow
+    name: OpenSSH
+- name: allow bind9
+  ufw:
+    rule: allow
+    name: DNS
+  when: inventory_hostname_short == hostname.dns or inventory_hostname_short == hostname.vagrant
+- name: allow https
+  ufw:
+    rule: allow
+    name: WWW Secure
+  when: inventory_hostname_short == hostname.web or inventory_hostname_short == hostname.vagrant
+- name: enable ufw
+  ufw:
+    state: enabled
+- name: make sure ufw is running and enabled on startup
+  service:
+    name: ufw
+    state: started
+    enabled: yes

@@ -1,0 +1,7 @@
+---
+# file: roles/common/defaults/main.yml
+# Variables set in this folder are only available for this role.
+hostname:
+  dns: rootofalldns
+  web: rootofallweb
+  vagrant: default

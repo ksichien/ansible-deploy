@@ -27,6 +27,4 @@
 -A INPUT -p icmp -m icmp --icmp-type 0 -j ACCEPT
 -A INPUT -p tcp -m tcp --sport 513:65535 --dport 22 -m conntrack --ctstate NEW -j ACCEPT
 -A INPUT -p tcp -m tcp --sport 513:65535 --dport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
--A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
--A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 COMMIT
