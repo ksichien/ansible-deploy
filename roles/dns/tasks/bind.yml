@@ -1,0 +1,53 @@
+---
+# file: roles/dns/tasks/bind.yml
+- name: install bind
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: ['bind9', 'bind9utils']
+- name: create named.conf.log in /etc/bind/
+  copy: 
+    src: named.conf.log
+    dest: /etc/bind/named.conf.log
+    owner: root
+    group: bind
+    mode: 0644
+  notify: reload bind
+- name: create templates in /etc/bind/
+  template: 
+    src: "{{ item }}"
+    dest: "/etc/bind/{{ item }}"
+    owner: root
+    group: bind
+    mode: 0644
+  notify: reload bind
+  with_items: ['named.conf', 'named.conf.local', 'named.conf.options']
+- name: create db.domain in /var/lib/bind/
+  template: 
+    src: db.domain
+    dest: "/var/lib/bind/db.{{ domain }}"
+    owner: bind
+    group: root
+    mode: 0640
+  notify: reload bind
+- name: create db.domain.inv in /var/lib/bind/
+  template: 
+    src: db.domain.inv
+    dest: "/var/lib/bind/db.{{ domain }}.inv"
+    owner: bind
+    group: root
+    mode: 0640
+  notify: reload bind
+- name: create logs in /var/log/
+  file:
+    path: "/var/log/{{ item }}"
+    owner: bind
+    group: root
+    mode: 0640
+    state: touch
+  with_items: ['bind.log', 'security_info.log', 'update_debug.log']
+- name: make sure bind is running and enabled on startup
+  service:
+    name: bind9
+    state: started
+    enabled: yes

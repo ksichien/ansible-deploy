@@ -1,0 +1,11 @@
+---
+# file: roles/dns/defaults/main.yml
+# Variables set in this folder are only available for this role.
+forwarders:
+  first: 8.8.8.8
+  second: 9.9.9.9
+internals:
+  cidr: 8
+  ip: 10.0.0.0
+reverse: 10
+router: 10.0.0.1

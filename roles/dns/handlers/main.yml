@@ -1,0 +1,6 @@
+---
+# file: roles/dns/handlers/main.yml
+- name: reload bind
+  service:
+    name: bind9
+    state: reloaded

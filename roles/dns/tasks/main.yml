@@ -1,0 +1,3 @@
+---
+# file: roles/dns/tasks/main.yml
+- import_tasks: bind.yml

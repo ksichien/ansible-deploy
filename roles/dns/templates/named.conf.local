@@ -1,0 +1,19 @@
+// Manage the file logs
+include "/etc/bind/named.conf.log";
+
+// Domain Management {{ domain }}
+// ------------------------------
+//  - The server is defined as the master on the domain.
+//  - There are no forwarders for this domain.
+zone "{{ domain }}" {
+        type master;
+        file "/var/lib/bind/db.{{ domain }}";
+};
+zone "{{ reverse }}.in-addr.arpa" {
+        type master;
+        file "/var/lib/bind/db.{{ domain }}.inv";
+};
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+include "/etc/bind/zones.rfc1918";

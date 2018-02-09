@@ -1,5 +1,6 @@
 ---
 # file: roles/web/defaults/main.yml
+# Variables set in this folder are only available for this role.
 application:
   base_dir: /var/www
   devise_secret_key: faf1029a04af0309335642b4f230ccff198eaabb5b7463308fc48cd6837d6b7bdb840f73b5dd38ef8d461bff33ed5968bf38259ec83d3e3d3e1847591ba0a0ec

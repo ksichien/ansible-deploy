@@ -17,11 +17,24 @@ web
 ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vandelayindustries.com"'
 
 [onsite]
-rla ansible_host=10.0.0.20
+rootofalldns ansible_host=10.0.0.10
+rootofallmedia ansible_host=10.0.0.20
+rootofallweb ansible_host=10.0.0.30
 
 [linux:children]
 offsite
 onsite
 
 [linux:vars]
-ansible_user=ksichien
+ansible_python_interpreter=/usr/bin/python3
+ansible_user=veilofnoise
+
+[vagrant]
+default
+
+[vagrant:vars]
+ansible_host=127.0.0.1
+ansible_port=2222
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_private_key_file=.vagrant/machines/default/virtualbox/private_key
+ansible_user=vagrant

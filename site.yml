@@ -2,14 +2,14 @@
 # file: site.yml
 - hosts: onsite
   roles:
-  - common
-  - firewall
+    - common
+    - firewall
   become: yes
-  vars:
-    - ansible_python_interpreter: /usr/bin/python3
+- hosts: rootofalldns
+  roles:
+    - dns
+  become: yes
 - hosts: rla
   roles:
-  - web
+    - web
   become: yes
-  vars:
-    - ansible_python_interpreter: /usr/bin/python3

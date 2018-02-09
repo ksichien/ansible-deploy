@@ -3,8 +3,6 @@
 - hosts: default
   roles:
   - common
-  # - firewall
-  # - web
-  vars:
-  - ansible_python_interpreter: /usr/bin/python3
+  - firewall
+  - dns
   become: yes

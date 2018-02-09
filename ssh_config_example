@@ -14,6 +14,12 @@ Host 10.2.1.20
 # web-il-2.vandelayindustries.com
 Host 10.2.1.21
     IdentityFile ~/.ssh/web_il_2_ed25519
-# rla
+# rootofalldns
+Host 10.0.0.10
+    IdentityFile ~/.ssh/github_rsa
+# rootofallmedia
+Host 10.0.0.20
+    IdentityFile ~/.ssh/github_rsa
+# rootofallweb
 Host 10.0.0.30
-    IdentityFile ~/.ssh/rla_ed25519
+    IdentityFile ~/.ssh/github_rsa
