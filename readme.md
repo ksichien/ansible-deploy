@@ -4,7 +4,7 @@ This is a small collection of Ansible playbooks I've written to automate the ins
 There are several roles included:
 - common: create user accounts and configure ssh access
 - firewall: configure iptables and fail2ban
-- web: clone the web application with git, configure ruby, configure rails, configure postgresql, configure nginx and passenger
+- web: configure a Ruby on Rails web application using postgresql, ngix and passenger
 
 I've included a Vagrantfile and vagrant.yml playbook for testing everything out.
 
