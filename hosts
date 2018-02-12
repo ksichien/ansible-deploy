@@ -19,7 +19,6 @@ ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vande
 [onsite]
 rootofalldns ansible_host=10.0.0.10
 rootofallmedia ansible_host=10.0.0.20
-rootofallweb ansible_host=10.0.0.30
 
 [linux:children]
 offsite

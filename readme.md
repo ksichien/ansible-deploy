@@ -1,15 +1,21 @@
 # ansible-playbooks
-This is a small collection of Ansible playbooks I've written to automate the installation, configuration and maintenance of several Debian GNU/Linux servers.
+This is a collection of Ansible playbooks I've written to automate the installation, configuration and maintenance of several Debian GNU/Linux servers.
 
 There are several roles included:
 - common: create user accounts and configure ssh access
-- firewall: configure ufw and fail2ban
 - dns: configure dns using bind
+- firewall: configure ufw and fail2ban
+- media: configure file sharing using samba
 - web: configure a ruby on rails web application using postgresql, nginx and passenger
 
-I've included a Vagrantfile and vagrant.yml playbook for testing everything out.
+A lot of settings can be changed in the roles' respective `defaults` and `vars` folders.
 
-In order to do this, the following process needs to be followed:
+The hosts file in this project has also been set up to work with an ssh bastion for all offsite hosts.
+An `~/.ssh/config` example file has been included for reference.
+
+Finally, a Vagrantfile and a vagrant.yml playbook have also been included for testing everything out.
+
+In order to do use them, the following process needs to be followed:
 - Install Virtualbox, Vagrant & Ansible
 ```
 $ sudo apt install virtualbox vagrant ansible

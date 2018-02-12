@@ -1,0 +1,6 @@
+---
+# file: roles/dns/handlers/main.yml
+- name: reload samba
+  service:
+    name: smbd
+    state: reloaded

@@ -6,13 +6,19 @@
     state: latest
 - name: allow ssh
   ufw:
-    rule: allow
+    rule: limit
     name: OpenSSH
 - name: allow bind9
   ufw:
     rule: allow
     name: DNS
   when: inventory_hostname_short == hostname.dns or inventory_hostname_short == hostname.vagrant
+- name: allow samba
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  with_items: ['137', '138', '139', '445']
+  when: inventory_hostname_short == hostname.media or inventory_hostname_short == hostname.vagrant
 - name: allow https
   ufw:
     rule: allow

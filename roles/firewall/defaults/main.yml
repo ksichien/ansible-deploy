@@ -3,5 +3,6 @@
 # Variables set in this folder are only available for this role.
 hostname:
   dns: rootofalldns
+  media: rootofallmedia
   web: rootofallweb
   vagrant: default

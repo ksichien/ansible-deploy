@@ -6,9 +6,8 @@ $TTL    3600
                         86400           ; Expire  [1d]
                           600 )         ; Negative Cache TTL [1h]
 ; ns records
-@       IN      NS      {{ inventory_hostname_short }}.{{ domain }}.
+@                   IN      NS      {{ inventory_hostname_short }}.{{ domain }}.
 ; a records
 {{ inventory_hostname_short }}      IN      A       {{ ansible_default_ipv4.address }}
 rootofallevil       IN      A       10.0.0.5
 rootofallmedia      IN      A       10.0.0.20
-rootofallweb        IN      A       10.0.0.30

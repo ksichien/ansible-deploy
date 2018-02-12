@@ -1,0 +1,7 @@
+---
+# file: roles/media/defaults/main.yml
+share_name: darkshare
+share_path: /srv/samba/darkshare
+user_group: darkness
+user_name: darkuser
+user_password: samba_password

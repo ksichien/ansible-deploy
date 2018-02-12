@@ -1,0 +1,32 @@
+---
+# file: roles/media/tasks/samba.yml
+- name: install samba
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: ['cifs-utils', 'samba']
+- name: create share group
+  group:
+    name: "{{ user_group }}"
+- name: create share user
+  user:
+    createhome: no
+    groups: "{{ user_group }}"
+    name: "{{ user_name }}"
+    password: "{{ user_password }}"
+- name: create share path
+  file:
+    path: "{{ share_path }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_group }}"
+    state: directory
+- name: create template in /etc/samba/
+  template:
+    src: smb.conf
+    dest: /etc/samba/smb.conf
+  notify: reload samba
+- name: make sure samba is running and enabled on startup
+  service:
+    name: smbd
+    state: started
+    enabled: yes

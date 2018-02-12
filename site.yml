@@ -1,15 +1,8 @@
 ---
 # file: site.yml
-- hosts: onsite
+- hosts: rootofallmedia
   roles:
     - common
     - firewall
-  become: yes
-- hosts: rootofalldns
-  roles:
-    - dns
-  become: yes
-- hosts: rla
-  roles:
-    - web
+    - media
   become: yes
