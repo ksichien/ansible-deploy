@@ -1,33 +1,10 @@
 ---
 # file: roles/web/tasks/rails.yml
 - name: install rails
-  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install rails"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/versions/{{ application.ruby.version }}/bin/gem install rails"
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"
 - name: rehash rbenv
-  shell: "/home/{{ application.username }}/.rbenv/bin/rbenv rehash"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/bin/rbenv rehash"
   become: yes
-  become_user: "{{ application.username }}"
-- name: install nodejs prerequisites
-  apt:
-    name: "{{ item }}"
-    state: latest
-  with_items: ['apt-transport-https', 'ca-certificates', 'curl']
-- name: check whether nodejs is installed
-  stat:
-    path: /usr/bin/nodejs
-  register: nodejs_installed
-- name: download the nodejs setup script from nodesource
-  get_url: 
-    url: https://deb.nodesource.com/setup_8.x
-    dest: "/home/{{ application.username }}/setup-nodejs"
-    mode: 0755
-  when: not nodejs_installed.stat.exists
-- name: execute the nodejs setup script
-  shell: "/home/{{ application.username }}/setup-nodejs"
-  when: not nodejs_installed.stat.exists
-- name: install nodejs
-  apt:
-    name: "{{ item }}"
-    state: latest
-  with_items: ['nodejs', 'build-essential']
+  become_user: "{{ application.ruby.username }}"

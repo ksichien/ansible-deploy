@@ -1,46 +1,55 @@
 ---
 # file: roles/web/tasks/git.yml
-- name: create application user
+- name: create application users
   user:
-    name: "{{ application.username }}"
-    password: "{{ application.password }}"
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
     shell: /bin/bash
     state: present
+  with_items: 
+    - "{{ application.nodejs }}"
+    - "{{ application.ruby }}"
 - name: install git
   apt:
     name: git
     state: latest
-- name: clone the application's git repository
+- name: clone the application git repositories
   git:
-    repo: "{{ git.repository.application }}"
-    dest: "/var/www/{{ application.name }}/"
+    repo: "{{ item.repository }}"
+    dest: "/var/www/{{ item.name }}/"
     force: yes
-- name: reassign application folder ownership to application user
+  with_items: 
+    - "{{ application.nodejs }}"
+    - "{{ application.ruby }}"
+- name: reassign application folder ownership to application users
   file:
-    path: "/var/www/{{ application.name }}/"
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    path: "/var/www/{{ item.name }}/"
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
     recurse: yes
+  with_items: 
+    - "{{ application.nodejs }}"
+    - "{{ application.ruby }}"
 - name: modify access permissions for application config and db folders
   file:
-    path: "/var/www/{{ application.name }}/{{ item }}"
+    path: "/var/www/{{ application.ruby.name }}/{{ item }}"
     mode: 0700
   with_items: ['config', 'db']
 - name: create database.yml and secrets.yml
   copy:
     src: "{{ item }}"
-    dest: "{{ application.base_dir }}/{{ application.name }}/config/{{ item }}"
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    dest: "{{ application.base_dir }}/{{ application.ruby.name }}/config/{{ item }}"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     mode: 0600
     force: yes
   with_items: ['database.yml', 'secrets.yml']
 - name: create devise.rb
   template:
     src: "{{ item }}"
-    dest: "{{ application.base_dir }}/{{ application.name }}/config/initializers/{{ item }}"
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    dest: "{{ application.base_dir }}/{{ application.ruby.name }}/config/initializers/{{ item }}"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     mode: 0600
     force: yes
   with_items: 'devise.rb'

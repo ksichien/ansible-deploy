@@ -64,10 +64,13 @@
     regexp: '^(\s+)# include /etc/nginx/passenger.conf;'
     replace: 'include /etc/nginx/passenger.conf;'
   notify: restart nginx
-- name: create rails-ldap-app.conf
+- name: create application conf files
   template: 
-    src: rails-ldap-app.conf
-    dest: /etc/nginx/sites-enabled/rails-ldap-app.conf
+    src: "{{ item.name }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item.name }}.conf"
+  with_items: 
+    - "{{ application.nodejs }}"
+    - "{{ application.ruby }}"
   notify: restart nginx
 - name: make sure nginx is running and enabled on startup
   service:

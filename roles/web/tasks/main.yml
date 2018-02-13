@@ -1,6 +1,7 @@
 ---
 # file: roles/web/tasks/main.yml
 - import_tasks: git.yml
+- import_tasks: nodejs.yml
 - import_tasks: ruby.yml
 - import_tasks: rails.yml
 - import_tasks: postgresql.yml

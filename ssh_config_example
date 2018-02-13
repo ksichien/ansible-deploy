@@ -20,3 +20,6 @@ Host 10.0.0.10
 # rootofallmedia
 Host 10.0.0.20
     IdentityFile ~/.ssh/github_rsa
+# rootofallweb
+Host 10.0.0.30
+    IdentityFile ~/.ssh/github_rsa

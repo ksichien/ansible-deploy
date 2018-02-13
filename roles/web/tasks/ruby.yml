@@ -3,45 +3,45 @@
 - name: install rbenv
   git:
     repo: "{{ git.repository.rbenv }}"
-    dest: "/home/{{ application.username }}/.rbenv/"
+    dest: "/home/{{ application.ruby.username }}/.rbenv/"
 - name: install ruby-build plugin
   git:
     repo: "{{ git.repository.ruby_build }}"
-    dest: "/home/{{ application.username }}/.rbenv/plugins/ruby-build/"
+    dest: "/home/{{ application.ruby.username }}/.rbenv/plugins/ruby-build/"
 - name: reassign rbenv folder ownership to application user
   file:
-    path: "/home/{{ application.username }}/.rbenv/"
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    path: "/home/{{ application.ruby.username }}/.rbenv/"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     recurse: yes
 - name: add rbenv to path in bash_profile
   lineinfile:
     regexp: '^export'
     line: export PATH="$HOME/.rbenv/bin:$PATH"
-    path: "/home/{{ application.username }}/.bash_profile"
+    path: "/home/{{ application.ruby.username }}/.bash_profile"
     create: yes
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     mode: 0644
     state: present
 - name: add rbenv init to bash_profile
   lineinfile:
     regexp: '^eval'
     line: eval "$(rbenv init -)"
-    path: "/home/{{ application.username }}/.bash_profile"
+    path: "/home/{{ application.ruby.username }}/.bash_profile"
     create: yes
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     mode: 0644
     state: present
 - name: source bash_profile in bashrc
   lineinfile:
     regexp: '^source ~/.bash_profile'
     line: source ~/.bash_profile
-    path: "/home/{{ application.username }}/.bashrc"
+    path: "/home/{{ application.ruby.username }}/.bashrc"
     create: yes
-    owner: "{{ application.username }}"
-    group: "{{ application.username }}"
+    owner: "{{ application.ruby.username }}"
+    group: "{{ application.ruby.username }}"
     mode: 0644
     state: present
 - name: install ruby prerequisites
@@ -51,18 +51,18 @@
   with_items: ['build-essential', 'libssl-dev', 'libreadline-dev', 'zlib1g-dev']
 - name: check whether ruby is installed
   stat:
-    path: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}"
+    path: "/home/{{ application.ruby.username }}/.rbenv/versions/{{ application.ruby.version }}"
   register: ruby_installed
 - name: install ruby
-  shell: "/home/{{ application.username }}/.rbenv/bin/rbenv install {{ application.ruby_version }}"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/bin/rbenv install {{ application.ruby.version }}"
   when: not ruby_installed.stat.exists
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"
 - name: set global ruby version
-  shell: "/home/{{ application.username }}/.rbenv/bin/rbenv global {{ application.ruby_version }}"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/bin/rbenv global {{ application.ruby.version }}"
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"
 - name: install bundler
-  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/gem install bundler"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/versions/{{ application.ruby.version }}/bin/gem install bundler"
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"

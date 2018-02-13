@@ -24,15 +24,15 @@
     state: present
   become: yes
   become_user: postgres
-- name: install application dependencies
-  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle install --deployment --without development test"
+- name: install ruby application dependencies
+  shell: "/home/{{ application.ruby.username }}/.rbenv/versions/{{ application.ruby.version }}/bin/bundle install --deployment --without development test"
   args:
-    chdir: "/var/www/{{ application.name }}/"
+    chdir: "/var/www/{{ application.ruby.name }}/"
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"
 - name: compile rails assets and run database migrations
-  shell: "/home/{{ application.username }}/.rbenv/versions/{{ application.ruby_version }}/bin/bundle exec rake assets:precompile db:migrate RAILS_ENV=production"
+  shell: "/home/{{ application.ruby.username }}/.rbenv/versions/{{ application.ruby.version }}/bin/bundle exec rake assets:precompile db:migrate RAILS_ENV=production"
   args:
-    chdir: "/var/www/{{ application.name }}/"
+    chdir: "/var/www/{{ application.ruby.name }}/"
   become: yes
-  become_user: "{{ application.username }}"
+  become_user: "{{ application.ruby.username }}"
