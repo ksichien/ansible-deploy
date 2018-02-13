@@ -14,6 +14,8 @@
     groups: "{{ user_group }}"
     name: "{{ user_name }}"
     password: "{{ user_password }}"
+- name: create samba user
+  shell: "(echo {{ user_password }}; echo {{ user_password }}) | smbpasswd -a {{ user_name }}"
 - name: create share path
   file:
     path: "{{ share_path }}"
