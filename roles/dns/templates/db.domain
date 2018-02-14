@@ -11,3 +11,4 @@ $TTL    3600
 {{ inventory_hostname_short }}      IN      A       {{ ansible_default_ipv4.address }}
 rootofallevil       IN      A       10.0.0.5
 rootofallmedia      IN      A       10.0.0.20
+rootofallweb        IN      A       10.0.0.30

@@ -11,3 +11,4 @@ $TTL    3600
 10.0.0      IN      PTR     {{ inventory_hostname_short }}.{{ domain }}.
 5.0.0       IN      PTR     rootofallevil.{{ domain }}.
 20.0.0      IN      PTR     rootofallmedia.{{ domain }}.
+30.0.0      IN      PTR     rootofallweb.{{ domain }}.

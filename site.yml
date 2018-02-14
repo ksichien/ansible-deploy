@@ -1,8 +1,19 @@
 ---
 # file: site.yml
-- hosts: rootofallweb
+- hosts: onsite
   roles:
     - common
     - firewall
+  become: yes
+- hosts: rootofalldns
+  roles:
+    - dns
+  become: yes
+- hosts: rootofallmedia
+  roles:
+    - media
+  become: yes
+- hosts: rootofallweb
+  roles:
     - web
   become: yes

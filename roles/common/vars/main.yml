@@ -1,4 +1,3 @@
 ---
 # file: roles/common/vars/main.yml
 # Variables set in this folder are available to all others as well.
-domain: darkness.org
