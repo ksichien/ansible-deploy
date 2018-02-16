@@ -21,6 +21,7 @@
   with_items: 
     - "{{ application.nodejs }}"
     - "{{ application.ruby }}"
+  notify: restart nginx
 - name: reassign application folder ownership to application users
   file:
     path: "/var/www/{{ item.name }}/"
