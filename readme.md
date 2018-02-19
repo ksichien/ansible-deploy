@@ -1,5 +1,7 @@
-# ansible-playbooks
+# Ansible Playbooks
 This is a collection of Ansible playbooks I've written to automate the installation, configuration and maintenance of several Debian GNU/Linux servers.
+
+## Overview
 
 There are several roles included:
 - common: create user accounts and configure ssh access
@@ -14,6 +16,8 @@ The hosts file in this project has also been set up to work with an ssh bastion 
 An `~/.ssh/config` example file has been included for reference.
 
 Finally, a Vagrantfile and a vagrant.yml playbook have also been included for testing everything out.
+
+## Usage
 
 In order to do use them, the following process needs to be followed:
 - Install Virtualbox, Vagrant & Ansible
