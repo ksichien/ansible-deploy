@@ -2,3 +2,4 @@
 # file: roles/common/tasks/main.yml
 - import_tasks: users.yml
 - import_tasks: apt.yml
+- import_tasks: zabbix.yml

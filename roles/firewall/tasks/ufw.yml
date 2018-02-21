@@ -8,6 +8,11 @@
   ufw:
     rule: limit
     name: OpenSSH
+- name: allow zabbix
+  ufw:
+    rule: allow
+    src: "{{ zabbix_address }}"
+    port: "{{ zabbix_port }}"
 - name: allow dns
   ufw:
     rule: allow
