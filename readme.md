@@ -8,7 +8,7 @@ There are several roles included:
 - dns: configure dns using bind
 - firewall: configure the firewall using ufw and fail2ban
 - media: configure file sharing using samba
-- monitoring: configure zabbix agent
+- monitoring: configure rsyslog and zabbix agent
 - web: configure multiple web applications using nginx and passenger
 
 A lot of settings can be changed in the roles' respective `defaults` and `vars` folders.

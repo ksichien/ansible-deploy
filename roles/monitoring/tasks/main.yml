@@ -1,3 +1,4 @@
 ---
 # file: roles/monitoring/tasks/main.yml
+- import_tasks: graylog.yml
 - import_tasks: zabbix.yml

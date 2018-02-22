@@ -32,6 +32,8 @@ onsite
 [linux:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=veilofnoise
+graylog_ip=10.0.0.40
+graylog_port=514
 zabbix_address=10.0.0.50
 zabbix_port=10050
 
@@ -45,5 +47,7 @@ ansible_python_interpreter=/usr/bin/python3
 ansible_ssh_private_key_file=.vagrant/machines/default/virtualbox/private_key
 ansible_user=vagrant
 domain=vandelayindustries.com
+graylog_ip=0.0.0.0
+graylog_port=514
 zabbix_address=0.0.0.0
 zabbix_port=10050
