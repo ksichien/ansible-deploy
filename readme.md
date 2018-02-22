@@ -4,10 +4,11 @@ This is a collection of Ansible playbooks I've written to automate the installat
 ## Overview
 
 There are several roles included:
-- common: create user accounts, configure ssh access and zabbix agent
+- common: create user accounts and configure ssh access
 - dns: configure dns using bind
 - firewall: configure the firewall using ufw and fail2ban
 - media: configure file sharing using samba
+- monitoring: configure zabbix agent
 - web: configure multiple web applications using nginx and passenger
 
 A lot of settings can be changed in the roles' respective `defaults` and `vars` folders.
