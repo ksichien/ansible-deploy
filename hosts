@@ -1,16 +1,20 @@
-[web-de]
-web-de-1.vandelayindustries.com
-web-de-2.vandelayindustries.com
+[dns]
+ns.vandelayindustries.com
 
-[web-il]
-web-il-1.vandelayindustries.com
-web-il-2.vandelayindustries.com
+[media]
+smb.vandelayindustries.com
+
+[monitoring]
+gl.vandelayindustries.com
+zbx.vandelayindustries.com
 
 [web]
-web-de
-web-il
+www.vandelayindustries.com
 
 [offsite]
+dns
+media
+monitoring
 web
 
 [onsite]

@@ -1,4 +1,7 @@
 ---
 # file: group_vars/offsite.yml
 ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vandelayindustries.com"'
+ansible_user: ksichien
 domain: vandelayindustries.com
+graylog_ip: 172.16.1.10
+zabbix_ip: 172.16.1.20

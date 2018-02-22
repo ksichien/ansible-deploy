@@ -1,7 +1,4 @@
 ---
 # file: group_vars/linux.yml
 ansible_python_interpreter: /usr/bin/python3
-ansible_user: veilofnoise
-graylog_ip: 10.0.0.40
-zabbix_ip: 10.0.0.50
 zabbix_port: 10050

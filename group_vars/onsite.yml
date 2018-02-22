@@ -1,3 +1,6 @@
 ---
 # file: group_vars/onsite.yml
+ansible_user: veilofnoise
 domain: darkness.org
+graylog_ip: 10.0.0.40
+zabbix_ip: 10.0.0.50
