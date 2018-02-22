@@ -2,7 +2,7 @@
 # file: roles/monitoring/tasks/graylog.yml
 - name: configure rsyslog 
   copy:
-    content: "*.* @@{{ graylog_ip }}:{{ graylog_port }};RSYSLOG_SyslogProtocol23Format"
+    content: "*.* @@{{ graylog_ip }}:{{ graylog_port }};RSYSLOG_SyslogProtocol23Format\n"
     dest: "/etc/rsyslog.d/90-graylog.conf"
     owner: root
     group: root
