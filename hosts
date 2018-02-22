@@ -11,7 +11,7 @@ zbx.vandelayindustries.com
 [web]
 www.vandelayindustries.com
 
-[offsite]
+[offsite:children]
 dns
 media
 monitoring
@@ -22,7 +22,7 @@ rootofalldns
 rootofallmedia
 rootofallweb
 
-[linux]
+[linux:children]
 offsite
 onsite
 
