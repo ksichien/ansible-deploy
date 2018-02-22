@@ -1,0 +1,4 @@
+---
+# file: host_vars/rootofallweb.yml
+ansible_host: 10.0.0.30
+graylog_port: 1026

@@ -4,7 +4,7 @@
   roles:
     - common
     - firewall
-    - monitoring
+    # - monitoring
   become: yes
 - hosts: rootofalldns
   roles:

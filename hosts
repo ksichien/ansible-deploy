@@ -1,53 +1,26 @@
 [web-de]
-web-de-1.vandelayindustries.com ansible_host=10.1.1.10
-web-de-2.vandelayindustries.com ansible_host=10.1.1.11
+web-de-1.vandelayindustries.com
+web-de-2.vandelayindustries.com
 
 [web-il]
-web-il-1.vandelayindustries.com ansible_host=10.2.2.20
-web-il-2.vandelayindustries.com ansible_host=10.2.2.22
+web-il-1.vandelayindustries.com
+web-il-2.vandelayindustries.com
 
-[web:children]
+[web]
 web-de
 web-il
 
-[offsite:children]
+[offsite]
 web
 
-[offsite:vars]
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vandelayindustries.com"'
-domain=vandelayindustries.com
-
 [onsite]
-rootofalldns ansible_host=10.0.0.10
-rootofallmedia ansible_host=10.0.0.20
-rootofallweb ansible_host=10.0.0.30
+rootofalldns
+rootofallmedia
+rootofallweb
 
-[onsite:vars]
-domain=darkness.org
-
-[linux:children]
+[linux]
 offsite
 onsite
 
-[linux:vars]
-ansible_python_interpreter=/usr/bin/python3
-ansible_user=veilofnoise
-graylog_ip=10.0.0.40
-graylog_port=514
-zabbix_address=10.0.0.50
-zabbix_port=10050
-
 [vagrant]
 default
-
-[vagrant:vars]
-ansible_host=127.0.0.1
-ansible_port=2222
-ansible_python_interpreter=/usr/bin/python3
-ansible_ssh_private_key_file=.vagrant/machines/default/virtualbox/private_key
-ansible_user=vagrant
-domain=vandelayindustries.com
-graylog_ip=0.0.0.0
-graylog_port=514
-zabbix_address=0.0.0.0
-zabbix_port=10050

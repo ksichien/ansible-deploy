@@ -1,0 +1,12 @@
+---
+
+ansible_host: 127.0.0.1
+ansible_port: 2222
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_private_key_file: .vagrant/machines/default/virtualbox/private_key
+ansible_user: vagrant
+domain: vandelayindustries.com
+graylog_ip: 0.0.0.0
+graylog_port: 514
+zabbix_ip: 0.0.0.0
+zabbix_port: 10050

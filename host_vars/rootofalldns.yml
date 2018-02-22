@@ -1,0 +1,4 @@
+---
+# file: host_vars/rootofalldns.yml
+ansible_host: 10.0.0.10
+graylog_port: 1024

@@ -1,0 +1,4 @@
+---
+# file: host_vars/rootofallmedia.yml
+ansible_host: 10.0.0.20
+graylog_port: 1025

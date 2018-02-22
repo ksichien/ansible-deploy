@@ -1,0 +1,4 @@
+---
+# file: group_vars/offsite.yml
+ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ksichien@bastion.vandelayindustries.com"'
+domain: vandelayindustries.com

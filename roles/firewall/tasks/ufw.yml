@@ -11,7 +11,7 @@
 - name: allow zabbix
   ufw:
     rule: allow
-    src: "{{ zabbix_address }}"
+    src: "{{ zabbix_ip }}"
     port: "{{ zabbix_port }}"
 - name: allow dns
   ufw:
