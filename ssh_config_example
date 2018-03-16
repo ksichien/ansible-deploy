@@ -1,30 +1,55 @@
 # bastion
-Host bastion.vandelayindustries.com
+Host bastion
+    HostName bastion.vandelayindustries.com
+    User ksichien
 	IdentityFile ~/.ssh/bastion_ed25519
 # dns
-Host ns.vandelayindustries.com
+Host ns
+    HostName ns.vandelayindustries.com
+    User ksichien
     IdentityFile ~/.ssh/dns_ed25519
+    ProxyCommand ssh -W %h:%p ksichien@bastion.vandelayindustries.com
 # graylog
-Host gl.vandelayindustries.com
+Host gl
+    HostName gl.vandelayindustries.com
+    User ksichien
     IdentityFile ~/.ssh/graylog_ed25519
+    ProxyCommand ssh -W %h:%p ksichien@bastion.vandelayindustries.com
 # media
-Host smb.vandelayindustries.com
+Host smb
+    HostName smb.vandelayindustries.com
+    User ksichien
     IdentityFile ~/.ssh/media_ed25519
+    ProxyCommand ssh -W %h:%p ksichien@bastion.vandelayindustries.com
 # web
-Host www.vandelayindustries.com
+Host www
+    HostName www.vandelayindustries.com
+    User ksichien
     IdentityFile ~/.ssh/web_ed25519
+    ProxyCommand ssh -W %h:%p ksichien@bastion.vandelayindustries.com
 # zabbix
-Host zbx.vandelayindustries.com
+Host zbx
+    HostName zbx.vandelayindustries.com
+    User ksichien
     IdentityFile ~/.ssh/zabbix_ed25519
+    ProxyCommand ssh -W %h:%p ksichien@bastion.vandelayindustries.com
 # rootofalldns
-Host 10.0.0.10
+Host rootofalldns
+    HostName 10.0.0.10
+    User veilofnoise
     IdentityFile ~/.ssh/github_rsa
 # rootofallmedia
-Host 10.0.0.20
+Host rootofallmedia
+    HostName 10.0.0.20
+    User veilofnoise
     IdentityFile ~/.ssh/github_rsa
 # rootofallweb
-Host 10.0.0.30
+Host rootofallweb
+    HostName 10.0.0.30
+    User veilofnoise
     IdentityFile ~/.ssh/github_rsa
 # vagrant
-Host 10.10.10.10
+Host vagrant
+    HostName 10.10.10.10
+    User veilofnoise
     IdentityFile ~/.ssh/github_rsa
