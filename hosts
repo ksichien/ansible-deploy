@@ -1,15 +1,15 @@
 [dns]
-ns.vandelayindustries.com
+ns
 
 [media]
-smb.vandelayindustries.com
+smb
 
 [monitoring]
-gl.vandelayindustries.com
-zbx.vandelayindustries.com
+gl
+zbx
 
 [web]
-www.vandelayindustries.com
+www
 
 [offsite:children]
 dns

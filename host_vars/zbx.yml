@@ -1,0 +1,4 @@
+---
+# file: host_vars/zbx.yml
+ansible_host: zbx.vandelayindustries.com
+graylog_port: 1027

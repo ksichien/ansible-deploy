@@ -1,0 +1,4 @@
+---
+# file: host_vars/smb.yml
+ansible_host: smb.vandelayindustries.com
+graylog_port: 1025

@@ -1,0 +1,4 @@
+---
+# file: host_vars/gl.yml
+ansible_host: gl.vandelayindustries.com
+graylog_port: 1514

@@ -1,0 +1,4 @@
+---
+# file: host_vars/www.yml
+ansible_host: www.vandelayindustries.com
+graylog_port: 1026

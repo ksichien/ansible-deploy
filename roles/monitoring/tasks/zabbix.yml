@@ -11,6 +11,10 @@
     - ansible_distribution == 'Debian'
     - ansible_distribution_release == 'Stretch'
     - not zabbix_agent_installed.stat.exists
+- name: resynchronize the package index files from their sources
+  apt:
+    update_cache: yes
+  when: not zabbix_agent_installed.stat.exists
 - name: install zabbix agent
   apt:
     name: zabbix-agent

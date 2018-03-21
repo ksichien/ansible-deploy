@@ -1,0 +1,4 @@
+---
+# file: host_vars/ns.yml
+ansible_host: ns.vandelayindustries.com
+graylog_port: 1024
